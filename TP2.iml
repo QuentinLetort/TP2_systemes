@@ -38,5 +38,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="org.jasypt:jasypt:1.9.3" level="project" />
   </component>
 </module>

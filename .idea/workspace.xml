@@ -6,20 +6,77 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0b7a41-2ceb-44ef-8019-ea44950ddd58" name="Default Changelist" comment="" />
+    <list default="true" id="ee0b7a41-2ceb-44ef-8019-ea44950ddd58" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_jasypt_jasypt_1_9_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/config/InitialisationDaoFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/dao/DAOConfigurationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/dao/DAOException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/dao/DAOFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/dao/DAOUtilitaire.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/dao/UtilisateurDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/dao/UtilisateurDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/dao/dao.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/uqac/forms/FormValidationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TP2_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/TP2_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.sql.swp" beforeDir="false" afterPath="$PROJECT_DIR$/.sql.swp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TP2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/beans/Utilisateur.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/beans/Utilisateur.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/forms/ConnexionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/forms/ConnexionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/forms/InscriptionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/forms/InscriptionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/servlets/Connexion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/servlets/Connexion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/servlets/Inscription.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/classes/ca/uqac/servlets/Inscription.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/inscription.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/inscription.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/menu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TP2_war_exploded/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP2/ca/uqac/beans/Utilisateur.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP2/ca/uqac/beans/Utilisateur.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP2/ca/uqac/forms/ConnexionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP2/ca/uqac/forms/ConnexionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP2/ca/uqac/forms/InscriptionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP2/ca/uqac/forms/InscriptionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP2/ca/uqac/servlets/Connexion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP2/ca/uqac/servlets/Connexion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP2/ca/uqac/servlets/Inscription.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP2/ca/uqac/servlets/Inscription.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/uqac/beans/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/uqac/beans/Utilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/uqac/forms/ConnexionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/uqac/forms/ConnexionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/uqac/forms/InscriptionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/uqac/forms/InscriptionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/uqac/servlets/Connexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/uqac/servlets/Connexion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/uqac/servlets/Inscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/uqac/servlets/Inscription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/inscription.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/inscription.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/menu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -29,7 +86,13 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="1U2BJFHOobrcaJwJ9hIHXrXJmdQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/mysql-connector-java-8.0.18/mysql-connector-java-8.0.18.jar!/" />
@@ -37,6 +100,7 @@
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.applicationServers" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -77,6 +141,39 @@
       <predefined_log_file id="Tomcat Manager" />
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="36359" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
@@ -111,11 +208,22 @@
       <option name="presentableId" value="Default" />
       <updated>1574544735919</updated>
       <workItem from="1574544739550" duration="744000" />
-      <workItem from="1574564726482" duration="8742000" />
+      <workItem from="1574564726482" duration="42806000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

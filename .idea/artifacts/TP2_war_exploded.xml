@@ -10,6 +10,7 @@
         <element id="directory" name="lib">
           <element id="file-copy" path="$USER_HOME$/Téléchargements/jstl-1.2.jar" />
           <element id="file-copy" path="$USER_HOME$/mysql-connector-java-8.0.18/mysql-connector-java-8.0.18.jar" />
+          <element id="library" level="project" name="org.jasypt:jasypt:1.9.3" />
         </element>
       </element>
     </root>

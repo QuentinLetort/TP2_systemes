@@ -1,6 +1,9 @@
 package ca.uqac.beans;
 
+import java.sql.Timestamp;
+
 public class Utilisateur {
+    private Long id;
     private String nom;
     private String prenom;
     private String sexe;
@@ -8,6 +11,23 @@ public class Utilisateur {
     private String adresse;
     private String email;
     private String motDePasse;
+    private Timestamp dateInscription;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Timestamp getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(Timestamp dateInscription) {
+        this.dateInscription = dateInscription;
+    }
 
     public String getNom() {
         return nom;

@@ -36,4 +36,8 @@
         <servlet-name>Inscription</servlet-name>
         <url-pattern>/inscription</url-pattern>
     </servlet-mapping>
+
+    <listener>
+        <listener-class>ca.uqac.config.InitialisationDaoFactory</listener-class>
+    </listener>
 </web-app>

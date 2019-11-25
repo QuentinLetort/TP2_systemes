@@ -1,19 +1,33 @@
 package ca.uqac.forms;
 
 import ca.uqac.beans.Utilisateur;
+import ca.uqac.dao.DAOException;
+import ca.uqac.dao.UtilisateurDao;
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class InscriptionForm {
+    private static final String CHAMP_SEXE = "sexe";
+    private static final String CHAMP_PRENOM = "prenom";
+    private static final String CHAMP_NOM = "nom";
+    private static final String CHAMP_PAYS = "pays";
+    private static final String CHAMP_ADRESSE = "adresse";
     private static final String CHAMP_EMAIL = "email";
     private static final String CHAMP_PASS = "motdepasse";
     private static final String CHAMP_CONF = "confirmation";
-    private static final String CHAMP_NOM = "nom";
+
+    private static final String ALGO_CHIFFREMENT = "SHA-256";
 
     private String resultat;
     private Map<String, String> erreurs = new HashMap<>();
+    private UtilisateurDao utilisateurDao;
+
+    public InscriptionForm(UtilisateurDao utilisateurDao) {
+        this.utilisateurDao = utilisateurDao;
+    }
 
     public String getResultat() {
         return resultat;
@@ -24,69 +38,176 @@ public final class InscriptionForm {
     }
 
     public Utilisateur inscrireUtilisateur(HttpServletRequest request) {
+        String sexe = getValeurChamp(request, CHAMP_SEXE);
+        String prenom = getValeurChamp(request, CHAMP_PRENOM);
+        String nom = getValeurChamp(request, CHAMP_NOM);
+        String pays = getValeurChamp(request, CHAMP_PAYS);
+        String adresse = getValeurChamp(request, CHAMP_ADRESSE);
         String email = getValeurChamp(request, CHAMP_EMAIL);
         String motDePasse = getValeurChamp(request, CHAMP_PASS);
         String confirmation = getValeurChamp(request, CHAMP_CONF);
-        String nom = getValeurChamp(request, CHAMP_NOM);
 
         Utilisateur utilisateur = new Utilisateur();
-
         try {
-            validationEmail(email);
-        } catch (Exception e) {
-            setErreur(CHAMP_EMAIL, e.getMessage());
-        }
-        utilisateur.setEmail(email);
+            traiterSexe(sexe, utilisateur);
+            traiterPrenom(prenom, utilisateur);
+            traiterNom(nom, utilisateur);
+            traiterPays(pays, utilisateur);
+            traiterAdresse(adresse, utilisateur);
+            traiterEmail(email, utilisateur);
+            traiterMotsDePasse(motDePasse, confirmation, utilisateur);
 
-        try {
-            validationMotsDePasse(motDePasse, confirmation);
-        } catch (Exception e) {
-            setErreur(CHAMP_PASS, e.getMessage());
-            setErreur(CHAMP_CONF, null);
-        }
-        utilisateur.setMotDePasse(motDePasse);
-
-        try {
-            validationNom(nom);
-        } catch (Exception e) {
-            setErreur(CHAMP_NOM, e.getMessage());
-        }
-        utilisateur.setNom(nom);
-
-        if (erreurs.isEmpty()) {
-            resultat = "Succès de l'inscription.";
-        } else {
-            resultat = "Échec de l'inscription.";
+            if (erreurs.isEmpty()) {
+                utilisateurDao.creer(utilisateur);
+                resultat = "Succès de l'inscription.";
+            } else {
+                resultat = "Échec de l'inscription.";
+            }
+        } catch (DAOException e) {
+            resultat = "Échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+            e.printStackTrace();
         }
 
         return utilisateur;
     }
 
-    private void validationEmail(String email) throws Exception {
+    /*
+     * Appel à la validation de l'adresse email reçue et initialisation de la
+     * propriété email du bean
+     */
+    private void traiterEmail(String email, Utilisateur utilisateur) {
+        try {
+            validationEmail(email);
+        } catch (FormValidationException e) {
+            setErreur(CHAMP_EMAIL, e.getMessage());
+        }
+        utilisateur.setEmail(email);
+    }
+
+    /*
+     * Appel à la validation des mots de passe reçus, chiffrement du mot de
+     * passe et initialisation de la propriété motDePasse du bean
+     */
+    private void traiterMotsDePasse(String motDePasse, String confirmation, Utilisateur utilisateur) {
+        try {
+            validationMotsDePasse(motDePasse, confirmation);
+        } catch (FormValidationException e) {
+            setErreur(CHAMP_PASS, e.getMessage());
+            setErreur(CHAMP_CONF, null);
+        }
+
+        /*
+         * Utilisation de la bibliothèque Jasypt pour chiffrer le mot de passe
+         * efficacement.
+         *
+         * L'algorithme SHA-256 est ici utilisé, avec par défaut un salage
+         * aléatoire et un grand nombre d'itérations de la fonction de hashage.
+         *
+         * La String retournée est de longueur 56 et contient le hash en Base64.
+         */
+        ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+        passwordEncryptor.setAlgorithm(ALGO_CHIFFREMENT);
+        passwordEncryptor.setPlainDigest(false);
+        String motDePasseChiffre = passwordEncryptor.encryptPassword(motDePasse);
+        utilisateur.setMotDePasse(motDePasseChiffre);
+    }
+
+    /*
+     * Appel à la validation du nom reçu et initialisation de la propriété nom
+     * du bean
+     */
+    private void traiterNom(String nom, Utilisateur utilisateur) {
+        try {
+            validationChampsOrdinaire(nom, CHAMP_NOM);
+            validationNom(nom, CHAMP_NOM);
+        } catch (FormValidationException e) {
+            setErreur(CHAMP_NOM, e.getMessage());
+        }
+        utilisateur.setNom(nom);
+    }
+
+    /*
+     * Appel à la validation du nom reçu et initialisation de la propriété nom
+     * du bean
+     */
+    private void traiterPrenom(String prenom, Utilisateur utilisateur) {
+        try {
+            validationChampsOrdinaire(prenom, CHAMP_PRENOM);
+            validationNom(prenom, CHAMP_PRENOM);
+        } catch (FormValidationException e) {
+            setErreur(CHAMP_PRENOM, e.getMessage());
+        }
+        utilisateur.setPrenom(prenom);
+    }
+
+    /*
+     * Appel à la validation du nom reçu et initialisation de la propriété nom
+     * du bean
+     */
+    private void traiterPays(String pays, Utilisateur utilisateur) {
+        try {
+            validationChampsOrdinaire(pays, CHAMP_PAYS);
+        } catch (FormValidationException e) {
+            setErreur(CHAMP_PAYS, e.getMessage());
+        }
+        utilisateur.setPays(pays);
+    }
+
+    private void traiterAdresse(String adresse, Utilisateur utilisateur) {
+        try {
+            validationChampsOrdinaire(adresse, CHAMP_ADRESSE);
+        } catch (FormValidationException e) {
+            setErreur(CHAMP_ADRESSE, e.getMessage());
+        }
+        utilisateur.setAdresse(adresse);
+    }
+
+    private void traiterSexe(String sexe, Utilisateur utilisateur) {
+        try {
+            validationChampsOrdinaire(sexe, CHAMP_SEXE);
+        } catch (FormValidationException e) {
+            setErreur(CHAMP_SEXE, e.getMessage());
+        }
+        utilisateur.setSexe(sexe);
+    }
+
+    /* Validation de l'adresse email */
+    private void validationEmail(String email) throws FormValidationException {
         if (email != null) {
             if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-                throw new Exception("Merci de saisir une adresse mail valide.");
+                throw new FormValidationException("Merci de saisir une adresse mail valide.");
+            } else if (utilisateurDao.trouver(email) != null) {
+                throw new FormValidationException("Cette adresse email est déjà utilisée, merci d'en choisir une autre.");
             }
         } else {
-            throw new Exception("Merci de saisir une adresse mail.");
+            throw new FormValidationException("Merci de saisir une adresse mail.");
         }
     }
 
-    private void validationMotsDePasse(String motDePasse, String confirmation) throws Exception {
+    /* Validation des mots de passe */
+    private void validationMotsDePasse(String motDePasse, String confirmation) throws FormValidationException {
         if (motDePasse != null && confirmation != null) {
             if (!motDePasse.equals(confirmation)) {
-                throw new Exception("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
+                throw new FormValidationException("Les mots de passe entrés sont différents, merci de les saisir à nouveau.");
             } else if (motDePasse.length() < 3) {
-                throw new Exception("Les mots de passe doivent contenir au moins 3 caractères.");
+                throw new FormValidationException("Les mots de passe doivent contenir au moins 3 caractères.");
             }
         } else {
-            throw new Exception("Merci de saisir et confirmer votre mot de passe.");
+            throw new FormValidationException("Merci de saisir et confirmer votre mot de passe.");
         }
     }
 
-    private void validationNom(String nom) throws Exception {
-        if (nom != null && nom.length() < 3) {
-            throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
+    /* Validation de nom */
+    private void validationNom(String nom, String champs) throws FormValidationException {
+        if (nom != null && (nom.length() < 2 || !nom.matches("^[a-zA-ZÀ-ú\\-\\s\\']*"))) {
+            throw new FormValidationException("Le " + champs + " doit contenir au moins 2 caractères (lettres, espaces, traits d'union et apostrophes)");
+        }
+    }
+
+    /* Validation de champs ordinaire */
+    private void validationChampsOrdinaire(String valeur, String champs) throws FormValidationException {
+        if (valeur == null) {
+            throw new FormValidationException("Le champs "+champs+" doit être renseigné.");
         }
     }
 
@@ -106,7 +227,7 @@ public final class InscriptionForm {
         if (valeur == null || valeur.trim().length() == 0) {
             return null;
         } else {
-            return valeur.trim();
+            return valeur;
         }
     }
 }
