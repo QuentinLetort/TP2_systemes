@@ -36,7 +36,6 @@ public class ReservationForm {
     public Reservation reserverTrajet(HttpServletRequest request, Utilisateur client, Itineraire itineraire) {
         /* Récupération des champs du formulaire */
         String nbSieges = getValeurChamp(request, CHAMP_NB_SIEGES);
-        System.out.println(nbSieges);
         Reservation reservation = new Reservation();
         try {
             traiterNbSieges(nbSieges, reservation);
