@@ -17,7 +17,8 @@ public class ItineraireDaoImpl implements ItineraireDao {
     private static final String SQL_SELECT = "SELECT id, id_conducteur, date, heure, destination, origine, nb_places, prix, taille_baggage, date_annonce FROM Itineraire ORDER BY id";
     private static final String SQL_SELECT_PAR_ID = "SELECT id, id_conducteur, date, heure, destination, origine, nb_places, prix, taille_baggage, date_annonce FROM Itineraire WHERE id = ?";
     private static final String SQL_INSERT = "INSERT INTO Itineraire (id_conducteur, date, heure, destination, origine, nb_places, prix, taille_baggage, date_annonce) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-
+    private static final String SQL_UPDATE = "UPDATE Itineraire SET nb_places = ? WHERE id = ?";
+    
     private DAOFactory daoFactory;
 
     ItineraireDaoImpl(DAOFactory daoFactory) {
@@ -79,6 +80,26 @@ public class ItineraireDaoImpl implements ItineraireDao {
         }
 
         return itineraires;
+    }
+
+    @Override
+    public void modifier(Itineraire itineraire, Long nbPlaces) {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false,
+                    itineraire.getId(), nbPlaces);
+            int statut = preparedStatement.executeUpdate();
+            if (statut == 0) {
+                throw new DAOException("Échec de la modification de l'itinéraire, aucune ligne modifiée dans la table.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            fermeturesSilencieuses(preparedStatement, connexion);
+        }
     }
 
     /*

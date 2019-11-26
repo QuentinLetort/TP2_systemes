@@ -11,4 +11,6 @@ public interface ItineraireDao {
     Itineraire trouver(Long id) throws DAOException;
 
     List<Itineraire> lister() throws DAOException;
+
+    void modifier(Itineraire itineraire, Long nbPlaces);
 }

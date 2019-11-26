@@ -35,6 +35,10 @@
         <servlet-name>Reservation</servlet-name>
         <servlet-class>ca.uqac.servlets.ReservationTrajet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Recherche</servlet-name>
+        <servlet-class>ca.uqac.servlets.Recherche</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>Accueil</servlet-name>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>Reservation</servlet-name>
         <url-pattern>/reservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Recherche</servlet-name>
+        <url-pattern>/recherche</url-pattern>
     </servlet-mapping>
 
     <listener>
