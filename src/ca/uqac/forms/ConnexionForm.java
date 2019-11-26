@@ -40,7 +40,6 @@ public class ConnexionForm {
         try {
             traiterEmail(email);
             traiterMotDePasse(motDePasse);
-            utilisateur = utilisateurDao.trouver(email);
 
             /* Initialisation du résultat global de la validation. */
             if (erreurs.isEmpty()) {

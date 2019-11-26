@@ -12,6 +12,8 @@ public class RestrictionFilter implements Filter {
     public static final String ACCES_CONNEXION = "/connexion";
     public static final String ACCES_INSCRIPTION = "/inscription";
     public static final String ACCES_STYLES = "style.css";
+    public static final String ACCES_ITINERAIRES = "/listeItineraires";
+    public static final String [] ACCES_SANS_SESSION = new String[] {ACCES_CONNEXION, ACCES_INSCRIPTION, ACCES_STYLES, ACCES_ITINERAIRES};
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
 
 
@@ -26,11 +28,12 @@ public class RestrictionFilter implements Filter {
 
         /* Non-filtrage des ressources statiques */
         String chemin = request.getRequestURI().substring(request.getContextPath().length());
-        if (chemin.endsWith(ACCES_CONNEXION) || chemin.endsWith(ACCES_INSCRIPTION) || chemin.endsWith(ACCES_STYLES)) {
-            chain.doFilter(request, response);
-            return;
+        for (String acces : ACCES_SANS_SESSION) {
+            if (chemin.endsWith(acces)) {
+                chain.doFilter(request, response);
+                return;
+            }
         }
-
         /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
 

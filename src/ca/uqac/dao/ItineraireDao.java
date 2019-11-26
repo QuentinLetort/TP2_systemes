@@ -8,7 +8,7 @@ import java.util.List;
 public interface ItineraireDao {
     void creer(Itineraire itineraire) throws DAOException;
 
-    Itineraire trouver(long id) throws DAOException;
+    Itineraire trouver(Long id) throws DAOException;
 
     List<Itineraire> lister() throws DAOException;
 }

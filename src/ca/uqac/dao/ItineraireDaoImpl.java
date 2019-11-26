@@ -54,7 +54,7 @@ public class ItineraireDaoImpl implements ItineraireDao {
     }
 
     @Override
-    public Itineraire trouver(long id) throws DAOException {
+    public Itineraire trouver(Long id) throws DAOException {
         return trouver(SQL_SELECT_PAR_ID, id);
     }
 
