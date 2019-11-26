@@ -118,7 +118,6 @@ public final class InscriptionForm {
      */
     private void traiterNom(String nom, Utilisateur utilisateur) {
         try {
-            validationChampsOrdinaire(nom, CHAMP_NOM);
             validationNom(nom, CHAMP_NOM);
         } catch (FormValidationException e) {
             setErreur(CHAMP_NOM, e.getMessage());
@@ -132,7 +131,6 @@ public final class InscriptionForm {
      */
     private void traiterPrenom(String prenom, Utilisateur utilisateur) {
         try {
-            validationChampsOrdinaire(prenom, CHAMP_PRENOM);
             validationNom(prenom, CHAMP_PRENOM);
         } catch (FormValidationException e) {
             setErreur(CHAMP_PRENOM, e.getMessage());
@@ -199,15 +197,19 @@ public final class InscriptionForm {
 
     /* Validation de nom */
     private void validationNom(String nom, String champs) throws FormValidationException {
-        if (nom != null && (nom.length() < 2 || !nom.matches("^[a-zA-ZÀ-ú\\-\\s\\']*"))) {
-            throw new FormValidationException("Le " + champs + " doit contenir au moins 2 caractères (lettres, espaces, traits d'union et apostrophes)");
+        if (nom != null) {
+            if (nom.length() < 2 || !nom.matches("^[a-zA-ZÀ-ú\\-\\s\\']*")) {
+                throw new FormValidationException("Le " + champs + " doit contenir au moins 2 caractères (lettres, espaces, traits d'union et apostrophes)");
+            }
+        } else {
+            throw new FormValidationException("Le champs " + champs + " doit être renseigné.");
         }
     }
 
     /* Validation de champs ordinaire */
     private void validationChampsOrdinaire(String valeur, String champs) throws FormValidationException {
         if (valeur == null) {
-            throw new FormValidationException("Le champs "+champs+" doit être renseigné.");
+            throw new FormValidationException("Le champs " + champs + " doit être renseigné.");
         }
     }
 

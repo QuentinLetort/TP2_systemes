@@ -12,7 +12,7 @@ import static ca.uqac.dao.DAOUtilitaire.*;
 public class UtilisateurDaoImpl implements UtilisateurDao {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, nom, prenom, sexe, pays, adresse, email, mot_de_passe, date_inscription FROM Utilisateur WHERE email = ?";
-    private static final String SQL_SELECT_PAR_EMAIL_ET_MDP = "SELECT id, nom, prenom, sexe, pays, adresse, email, mot_de_passe, date_inscription FROM Utilisateur WHERE email = ? AND mot_de_passe = ?";
+    private static final String SQL_SELECT_PAR_ID = "SELECT id, nom, prenom, sexe, pays, adresse, email, mot_de_passe, date_inscription FROM Utilisateur WHERE id = ?";
     private static final String SQL_INSERT = "INSERT INTO Utilisateur (nom, prenom, sexe, pays, adresse, email, mot_de_passe, date_inscription) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
 
     UtilisateurDaoImpl(DAOFactory daoFactory) {
@@ -51,16 +51,30 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     }
 
     @Override
+    public Utilisateur trouver(Long id) throws DAOException {
+        return trouver(SQL_SELECT_PAR_ID, id);
+    }
+
+    @Override
     public Utilisateur trouver(String email) throws DAOException {
+        return trouver(SQL_SELECT_PAR_EMAIL, email);
+    }
+
+    private Utilisateur trouver(String sql, Object... objets) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Utilisateur utilisateur = null;
 
         try {
+            /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_PAR_EMAIL, false, email);
+            /*
+             * Préparation de la requête avec les objets passés en arguments
+             */
+            preparedStatement = initialisationRequetePreparee(connexion, sql, false, objets);
             resultSet = preparedStatement.executeQuery();
+            /* Parcours de la ligne de données retournée dans le ResultSet */
             if (resultSet.next()) {
                 utilisateur = map(resultSet);
             }
@@ -69,9 +83,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         } finally {
             fermeturesSilencieuses(resultSet, preparedStatement, connexion);
         }
+
         return utilisateur;
     }
-
 
     private static Utilisateur map(ResultSet resultSet) throws SQLException {
         Utilisateur utilisateur = new Utilisateur();

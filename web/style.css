@@ -1,34 +1,3 @@
-/* Menu */
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #111;
-}
-
-.active {
-    background-color: #2261af;
-}
-
-
 /* Général ------------------------------------------------------------------------------------- */
 
 body, p, legend, label, input {
@@ -43,6 +12,10 @@ fieldset {
 legend {
     font-weight: bold;
     color: #0568CD;
+}
+
+.succes {
+    color: #5d972e;
 }
 
 /* Forms --------------------------------------------------------------------------------------- */
@@ -70,6 +43,29 @@ form .erreur {
     color: #900;
 }
 
-form .succes {
-    color: #5d972e;
+/* Tableaux -------------------------------------------------------------------------------------*/
+table{
+    border-collapse: collapse;
+}
+tr.pair{
+    background-color: #efefef;
+}
+tr.impair{
+    background-color: #fff;
+}
+th{
+    color: #0568CD;
+    border: 1px solid #0568CD;
+    padding: 5px;
+}
+th.action{
+    border: 1px solid #900;
+    color: #900;
+}
+td{
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+td.action{
+    text-align: center;
 }

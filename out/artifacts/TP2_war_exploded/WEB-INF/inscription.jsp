@@ -38,7 +38,7 @@
                     <span class="erreur">${form.erreurs['pays']}</span>
                     <br/>
 
-                    <label for="adresse">Pays <span class="requis">*</span></label>
+                    <label for="adresse">Adresse <span class="requis">*</span></label>
                     <input type="text" id="adresse" name="adresse" value="<c:out value="${utilisateur.adresse}"/>" size="20"
                            maxlength="100"/>
                     <span class="erreur">${form.erreurs['adresse']}</span>
@@ -64,6 +64,12 @@
                     <br/>
 
                     <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+                    <%-- Vérification de la présence d'un objet utilisateur en session --%>
+                    <c:if test="${!empty sessionScope.sessionUtilisateur}">
+                        <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                        <p class="succes">Vous êtes connecté(e) avec l'adresse
+                            : ${sessionScope.sessionUtilisateur.email}</p>
+                    </c:if>
                 </fieldset>
             </form>
         </div>
